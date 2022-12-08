@@ -1,0 +1,75 @@
+#include <iostream>
+#include <string>
+#include <unordered_map>
+
+// Define a function to calculate the total bill with tip
+double calculate_total_bill(double bill, double tip_percent)
+{
+    // Calculate the tip amount
+    double tip = bill * (tip_percent / 100);
+
+    // Calculate the total bill with tip
+    double total_bill = bill + tip;
+
+    // Return the total bill with tip
+    return total_bill;
+}
+
+int main()
+{
+    // Define a dictionary of alcoholic drinks and their corresponding prices
+    std::unordered_map<std::string, double> drinks = {
+        {"martini", 8.00},
+        {"mojito", 8.50},
+        {"gin and tonic", 7.00},
+        {"old fashioned", 9.00},
+        {"margarita", 9.50},
+        {"cosmopolitan", 9.00},
+        {"daiquiri", 8.50},
+        {"manhattan", 9.50},
+        {"mai tai", 10.00},
+        {"long island iced tea", 11.00},
+        {"pina colada", 10.50},
+        {"rum and coke", 7.00},
+        {"screwdriver", 6.50},
+        {"bloody mary", 8.50},
+        {"white russian", 9.00},
+        {"black russian", 8.50},
+        {"champagne", 12.00},
+        {"mimosa", 9.50},
+        {"sangria", 8.00},
+        {"strawberry daiquiri", 9.00},
+        {"chocolate martini", 10.50},
+        {"irish coffee", 9.00},
+        {"espresso martini", 9.50},
+        {"bellini", 10.00},
+        {"french 75", 11.00}
+    };
+
+    // Define a variable to keep track of the total bill
+    double total_bill = 0;
+
+    // Iterate over the drinks and print their prices
+    for (const auto& [drink, price] : drinks)
+        std::cout << drink << ": $" << price << std::endl;
+
+    // Prompt the user for the drinks they want to order
+    std::cout << "Enter the drinks you want to order, separated by commas: ";
+
+    // Read the user's input
+    std::string order;
+    std::getline(std::cin, order);
+
+    // Split the user's order into a vector of individual drinks
+    std::vector<std::string> order_drinks;
+    std::stringstream order_stream(order);
+    std::string drink;
+    while (std::getline(order_stream, drink, ','))
+        order_drinks.push_back(drink);
+
+    // Iterate over the drinks in the user's order and add their prices to the total bill
+    for (const std::string& drink : order_drinks)
+        total_bill += drinks[drink];
+
+    // Print the total bill
+    std::cout << "Your total bill is $" << total_bill << "." <<
